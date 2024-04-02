@@ -140,7 +140,7 @@ class Recipe:
         #=========Scrollbar==========
         scroll_x=ttk.Scrollbar(DetailsFrame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(DetailsFrame,orient=VERTICAL)
-        self.recipe_details=ttk.Treeview(DetailsFrame,column=("dishname","dishid","preptime","serves","difficulty","cuisine","addedby"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+        self.recipe_details=ttk.Treeview(DetailsFrame,column=("dishname","dishid","preptime","serves","difficulty","cuisine","tags","addedby"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
         
@@ -153,6 +153,7 @@ class Recipe:
         self.recipe_details.heading("serves",text="Serves")
         self.recipe_details.heading("difficulty",text="Difficulty")
         self.recipe_details.heading("cuisine",text="Cuisine")
+        self.recipe_details.heading("tags",text="Tags")
         self.recipe_details.heading("addedby",text="Added By")
 
         self.recipe_details["show"]="headings"
@@ -163,9 +164,19 @@ class Recipe:
         self.recipe_details.column("serves",width=100)
         self.recipe_details.column("difficulty",width=100)
         self.recipe_details.column("cuisine",width=100)
+        self.recipe_details.column("tags",width=100)
         self.recipe_details.column("addedby",width=100)
 
         self.recipe_details.pack(fill=BOTH,expand=1)
+
+    #=================Functionality Declaration==================
+    def iRecipeData(self):
+        if self.NameOfDish.get()=="" or self.DishID.get()=="":
+            messagebox.showerror("Error","All Fields are Required")
+        else:
+            conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
+            my_cursor=conn.cursor()
+
 
         
         
