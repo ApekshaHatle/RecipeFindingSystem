@@ -96,7 +96,7 @@ class Recipe:
 
         lblRecipe=Label(DataFrameLeft,text="Recipe",font=("arial",12,"bold"),padx=2,pady=6)
         lblRecipe.grid(row=1,column=2)
-        txtRecipe = Text(DataFrameLeft, font=("arial", 12, "bold"), height=13.5, width=40)
+        txtRecipe=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Recipe,height=13.5,width=40)
         txtRecipe.grid(row=1, column=3, columnspan=2, padx=5, pady=5, sticky='w',rowspan=7)
 
         #=====================DataFrameRight===========================
@@ -121,7 +121,7 @@ class Recipe:
         btnSearchWIngre.grid(row=6,column=1,pady=20)
 
         #=========================Buttons==============================
-        btnInsert=Button(ButtonFrame,text="Insert",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=23, command=self.add_dish)
+        btnInsert=Button(ButtonFrame,text="Insert",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=23,command=self.iInsertData)
         btnInsert.grid(row=0,column=0)
 
         btnUpdate=Button(ButtonFrame,text="Update",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=23)
@@ -155,6 +155,7 @@ class Recipe:
         self.recipe_details.heading("cuisine",text="Cuisine")
         self.recipe_details.heading("tags",text="Tags")
         self.recipe_details.heading("addedby",text="Added By")
+        self.recipe_details.heading("ingredients",text="Ingredients")
 
         self.recipe_details["show"]="headings"
 
@@ -166,65 +167,66 @@ class Recipe:
         self.recipe_details.column("cuisine",width=100)
         self.recipe_details.column("tags",width=100)
         self.recipe_details.column("addedby",width=100)
+        self.recipe_details.column("ingredients",width=100)
 
         self.recipe_details.pack(fill=BOTH,expand=1)
+        self.recipe_details.bind("<ButtonRelease-1>",self.get_cursor)
+        self.fetch_data()
 
     
     #=================Functionality Declaration==================
-        
-    def add_dish(self):
-        dish_name = self.NameOfDish.get()
-        ingredients = self.Ingredients.get()
 
-        if not dish_name:
-            messagebox.showerror("Error", "Please enter a dish name.")
-            return
-        if not ingredients:
-            messagebox.showerror("Error", "Please enter ingredients.")
-            return
-
-        try:
-            conn = mysql.connector.connect(host="localhost",port="3306", username="root", password="root", database="dishdetails")
-            cursor = self.conn.cursor()
-
-            # Insert dish into dish table
-            cursor.execute("INSERT INTO dish (DishName) VALUES (%s)", (dish_name))
-            dish_id = cursor.lastrowid
-            self.conn.commit()
-
-            # Split ingredients string and insert into ingredients table
-            ingredient_list = [ingredient.strip() for ingredient in ingredients.split(',')]
-            for ingredient in ingredient_list:
-                cursor.execute("INSERT INTO ingredients (IngredientName) VALUES (%s)", (ingredient))
-
-                # Get the ingredient_id of the newly inserted ingredient
-                ingredient_id = cursor.lastrowid
-
-                conn.commit()
-
-                # Insert into makes table to establish relationship
-                cursor.execute("INSERT INTO makes (DishID, IngredientID) VALUES (%s, %s)", (dish_id, ingredient_id))
-
-                conn.commit()
+    def iInsertData(self):
+        if self.NameOfDish.get()=="" or self.DishID.get()=="":
+            messagebox.showerror("Error","All Fields are Required")
+        else:
+            conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
+            my_cursor=conn.cursor()
+            my_cursor.execute("INSERT INTO dish values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                                                                                                                                                                                   
+                                                                                            self.NameOfDish.get(),
+                                                                                            self.DishID.get(),
+                                                                                            self.PrepTime.get(),
+                                                                                            self.Serves.get(),
+                                                                                            self.Difficulty.get(),
+                                                                                            self.Cuisine.get(),
+                                                                                            self.Tags.get(),
+                                                                                            self.AddedBy.get(),
+                                                                                            self.Recipe.get(),
+                                                                                            self.Ingredients.get()      
+                                                                                                                   ))
             conn.commit()
-            messagebox.showinfo("Success", "Dish added successfully.")
-        except mysql.connector.Error as e:
-            conn.rollback()
-            messagebox.showerror("Error", f"Error adding dish: {e}")
-        finally:
-            cursor.close()
+            self.fetch_data()
             conn.close()
+            messagebox.showinfo("Success","Record has been inserted")
 
-    # def iRecipeData(self):
-    #     if self.NameOfDish.get()=="" or self.DishID.get()=="":
-    #         messagebox.showerror("Error","All Fields are Required")
-    #     else:
-    #         conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
-    #         my_cursor=conn.cursor()
-
-
+    def fetch_data(self):
+        conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
+        my_cursor=conn.cursor()
+        my_cursor.execute("SELECT * FROM dish")
+        rows=my_cursor.fetchall()
+        if len(rows)!=0:
+            self.recipe_details.delete(*self.recipe_details.get_children())
+            for i in rows:
+                self.recipe_details.insert("",END,values=i)
+            conn.commit()
+        conn.close()
         
-        
+    def get_cursor(self,event):
+        cursor_row=self.recipe_details.focus()
+        content=self.recipe_details.item(cursor_row)
+        row=content["values"]
+        self.NameOfDish.set(row[0])
+        self.DishID.set(row[1])
+        self.PrepTime.set(row[2])
+        self.Serves.set(row[3])
+        self.Difficulty.set(row[4])
+        self.Cuisine.set(row[5])
+        self.Tags.set(row[6])
+        self.AddedBy.set(row[7])
+        self.Ingredients.set(row[8])
+        self.Recipe.set(row[9])
+
 root=Tk()
 ob=Recipe(root)
 root.mainloop()
@@ -232,4 +234,4 @@ root.mainloop()
 
 
 
-#fg="#FBEAEB",bg="#2F3C7E"  bg="#F1D3B2"
+#fg="#FBEAEB",bg="#2F3C7E"  bg="#F1D3B2"(DishName,DishID,PrepTime,Serves,Difficulty,Cuisine,Tags,AddedBy,Recipe,Ingredients) 
