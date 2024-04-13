@@ -94,7 +94,7 @@ class Recipe:
         txtAddedBy=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.AddedBy,width=30)
         txtAddedBy.grid(row=7,column=1)
 
-        lblIngredients=Label(DataFrameLeft,text=" Ingredients",font=("arial",12,"bold"),padx=2,pady=6)
+        lblIngredients=Label(DataFrameLeft,text="Ingredients",font=("arial",12,"bold"),padx=2,pady=6)
         lblIngredients.grid(row=8,column=0)
         txtIngredients=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Ingredients,width=30) 
         txtIngredients.grid(row=8,column=1)
@@ -140,13 +140,13 @@ class Recipe:
         btnUpdate=Button(ButtonFrame,text="Update",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28,command=self.update)
         btnUpdate.grid(row=0,column=1)
 
-        btnDelete=Button(ButtonFrame,text="Delete",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28)
+        btnDelete=Button(ButtonFrame,text="Delete",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28,command=self.delete_data)
         btnDelete.grid(row=0,column=2)
 
-        btnClear=Button(ButtonFrame,text="Clear",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28)
+        btnClear=Button(ButtonFrame,text="Clear",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28,command=self.clear_fields)
         btnClear.grid(row=0,column=3)
 
-        btnExit=Button(ButtonFrame,text="Exit",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28)
+        btnExit=Button(ButtonFrame,text="Exit",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28,command=self.exit_app)
         btnExit.grid(row=0,column=4)
 
         #=========================Display==============================
@@ -274,6 +274,32 @@ class Recipe:
         else:
             messagebox.showwarning("Search Error", "Please enter a dish name to search.")
 
+    def delete_data(self):
+        if not self.DishID.get():
+            messagebox.showerror("Error", "Please select a record to delete.")
+        else:
+            conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            my_cursor = conn.cursor()
+            my_cursor.execute("DELETE FROM dish WHERE DishID=%s", (self.DishID.get(),))
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success", "Record has been deleted.")
+            self.fetch_data()  # Refresh the displayed data after deletion
+
+    def clear_fields(self):
+        self.NameOfDish.set("")
+        self.DishID.set("")
+        self.PrepTime.set("")
+        self.Serves.set("")
+        self.Difficulty.set("")
+        self.Cuisine.set("")
+        self.Tags.set("")
+        self.AddedBy.set("")
+        self.Ingredients.set("")
+        self.Image.set("")
+
+    def exit_app(self):
+        self.root.destroy()
 
     def fetch_data(self):
         conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
