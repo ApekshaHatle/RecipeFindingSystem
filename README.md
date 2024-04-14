@@ -10,9 +10,16 @@
 
 ## For searching :
 * Enter the Dish name and click Search With Dish Name
+  
 ![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/ffd73f06-dff4-40c1-b38d-7da79d4d132c)
+
+
 * Enter Ingredient name and click Search With Ingredient
+  
 ![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/7f61ae8a-e5d9-443f-8516-a0bb43218de4)
 
- 
+
+## Other Functions : 
+The user can also Update, Delete and Clear entries.
+Click Exit to exit the System
 
