@@ -57,106 +57,120 @@ class Recipe:
     
         #=====================DataFrameLeft===========================
 
-        lblAddedBy=Label(DataFrameLeft,text="Added By",font=("arial",12,"bold"),padx=2,pady=6)
-        lblAddedBy.grid(row=0,column=0)
-        txtAddedBy=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.AddedBy,width=30)
-        txtAddedBy.grid(row=0,column=1)
+        # lblAddedBy=Label(DataFrameLeft,text="Added By",font=("arial",12,"bold"),padx=2,pady=6)
+        # lblAddedBy.grid(row=0,column=0)
+        # txtAddedBy=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.AddedBy,width=30)
+        # txtAddedBy.grid(row=0,column=1)
 
-        lblEmail=Label(DataFrameLeft,text="Email Addr",font=("arial",12,"bold"),padx=2,pady=6)
-        lblEmail.grid(row=1,column=0)
-        txtEmail=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Email,width=30)
-        txtEmail.grid(row=1,column=1)
+        # lblEmail=Label(DataFrameLeft,text="Email Addr",font=("arial",12,"bold"),padx=2,pady=6)
+        # lblEmail.grid(row=1,column=0)
+        # txtEmail=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Email,width=30)
+        # txtEmail.grid(row=1,column=1)
 
-        btnSetUser=Button(DataFrameLeft,text="Set User",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=15,command=self.setUser)
-        btnSetUser.grid(row=2,column=1,pady=12)
+        # btnSetUser=Button(DataFrameLeft,text="Set User",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=15,command=self.setUser)
+        # btnSetUser.grid(row=2,column=1,pady=12)
 
         lblDishName=Label(DataFrameLeft,text="Dish Name",font=("arial",12,"bold"),padx=2,pady=6)
-        lblDishName.grid(row=3,column=0)
+        lblDishName.grid(row=0,column=0)
         txtName=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.NameOfDish,width=30)
-        txtName.grid(row=3,column=1)
+        txtName.grid(row=0,column=1)
 
         lblDishID=Label(DataFrameLeft,text="Dish ID",font=("arial",12,"bold"),padx=2,pady=6)
-        lblDishID.grid(row=4,column=0)
+        lblDishID.grid(row=1,column=0)
         txtID=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.DishID,width=30)
-        txtID.grid(row=4,column=1)
+        txtID.grid(row=1,column=1)
 
         lblPrepTime=Label(DataFrameLeft,text="Preparation Time",font=("arial",12,"bold"),padx=2,pady=6)
-        lblPrepTime.grid(row=5,column=0)
+        lblPrepTime.grid(row=2,column=0)
         txtPrepTime=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.PrepTime,width=30)
-        txtPrepTime.grid(row=5,column=1)
+        txtPrepTime.grid(row=2,column=1)
 
         lblServings=Label(DataFrameLeft,text="Serves",font=("arial",12,"bold"),padx=2,pady=6)
-        lblServings.grid(row=6,column=0)
+        lblServings.grid(row=3,column=0)
         txtServings=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Serves,width=30)
-        txtServings.grid(row=6,column=1)
+        txtServings.grid(row=3,column=1)
 
         lblDiff=Label(DataFrameLeft,text="Difficulty",font=("arial",12,"bold"),padx=2,pady=6)
-        lblDiff.grid(row=7,column=0)
+        lblDiff.grid(row=4,column=0)
         txtDiff=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Difficulty,width=30)
-        txtDiff.grid(row=7,column=1)
+        txtDiff.grid(row=4,column=1)
 
         lblCuisine=Label(DataFrameLeft,text="Cuisine",font=("arial",12,"bold"),padx=2,pady=6)
-        lblCuisine.grid(row=8,column=0)
+        lblCuisine.grid(row=5,column=0)
         txtCuisine=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Cuisine,width=30)
-        txtCuisine.grid(row=8,column=1)
+        txtCuisine.grid(row=5,column=1)
 
         lblTags=Label(DataFrameLeft,text="Tags",font=("arial",12,"bold"),padx=2,pady=6)
-        lblTags.grid(row=0,column=2)
-        txtTags=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Tags,width=40)
-        txtTags.grid(row=0,column=3)
+        lblTags.grid(row=6,column=0)
+        txtTags=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Tags,width=30)
+        txtTags.grid(row=6,column=1)
 
         lblImage=Label(DataFrameLeft,text="Image",font=("arial",12,"bold"),padx=2,pady=6)
-        lblImage.grid(row=1,column=2)
-        txtImage=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Image,width=40)
-        txtImage.grid(row=1, column=3)
+        lblImage.grid(row=7,column=0)
+        txtImage=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Image,width=30)
+        txtImage.grid(row=7, column=1)
 
         lblRecipe=Label(DataFrameLeft,text="Recipe",font=("arial",12,"bold"),padx=2,pady=6)
-        lblRecipe.grid(row=2,column=2)
-        txtRecipe=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Recipe,width=40)
-        txtRecipe.grid(row=2, column=3)
+        lblRecipe.grid(row=8,column=0)
+        txtRecipe=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Recipe,width=30)
+        txtRecipe.grid(row=8, column=1)
+
+
 
         lblIngrInfo=Label(DataFrameLeft,text="Input Ingredients Individually",font=("arial",12,"bold"),padx=2,pady=6)
-        lblIngrInfo.grid(row=3,column=3,pady=5)
+        lblIngrInfo.grid(row=3,column=3,pady=5, columnspan=2)
 
         lblIngredient=Label(DataFrameLeft,text="Ingredient",font=("arial",12,"bold"),padx=2,pady=6)
         lblIngredient.grid(row=4,column=2,padx=15)
-        txtIngredient=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Ingredient,width=40) 
-        txtIngredient.grid(row=4,column=3)
+        txtIngredient=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Ingredient,width=35) 
+        txtIngredient.grid(row=4,column=3, columnspan=2)
 
         lblIngreID=Label(DataFrameLeft,text="Ingredient ID",font=("arial",12,"bold"),padx=2,pady=6)
         lblIngreID.grid(row=5,column=2,padx=15)
-        txtIngreID=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreID,width=40) 
-        txtIngreID.grid(row=5,column=3)
+        txtIngreID=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreID,width=35) 
+        txtIngreID.grid(row=5,column=3, columnspan=2)
 
         lblIngreQuantity=Label(DataFrameLeft,text="Quantity",font=("arial",12,"bold"),padx=2,pady=6)
         lblIngreQuantity.grid(row=6,column=2,padx=15)
-        txtIngreQuantity=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreQuantity,width=40) 
-        txtIngreQuantity.grid(row=6,column=3)
+        txtIngreQuantity=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreQuantity,width=35) 
+        txtIngreQuantity.grid(row=6,column=3, columnspan=2)
 
-        btnSaveIngre=Button(DataFrameLeft,text="Add Ingredient",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=15,command=self.addIngredients)
-        btnSaveIngre.grid(row=7,column=3)
 
+        btnInsertIngredient = Button(DataFrameLeft, text="Insert", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.insertIngredient)
+        btnInsertIngredient.grid(row=8, column=2, padx=11)
+
+        btnUpdateIngredient = Button(DataFrameLeft, text="Update", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.updateIngredient)
+        btnUpdateIngredient.grid(row=8, column=3, padx=9)
+
+        btnDeleteIngredient = Button(DataFrameLeft, text="Delete", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.deleteIngredient)
+        btnDeleteIngredient.grid(row=8, column=4, padx=9)
         #=====================DataFrameRight===========================
+
+        self.cmbSearchWithName = None
+        self.cmbSearchWithIngre = None
 
         lblSearchWithName=Label(DataFrameRight,text="Recipe Name",font=("arial",12,"bold"),padx=2,pady=6)
         lblSearchWithName.grid(row=0,column=0)
-        txtSearchWithName=Entry(DataFrameRight,font=("arial",12),textvariable=self.SearchWithName,width=35)
-        txtSearchWithName.grid(row=0,column=1,pady=10)
+        self.cmbSearchWithName=ttk.Combobox(DataFrameRight,font=("arial",12),textvariable=self.SearchWithName,width=30,state="NORMAL")
+        self.cmbSearchWithName.grid(row=0,column=1,pady=10)
 
         btnSearchWName=Button(DataFrameRight,text="Search With Dish Name",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=23,command=self.search_with_dish_name)
         btnSearchWName.grid(row=2,column=1,pady=20)
 
         lblOR=Label(DataFrameRight,text="OR",font=("arial",15,"bold"),padx=2,pady=6)
         lblOR.grid(row=3,column=1,pady=10)
-
+        
         lblSearchWithIngre=Label(DataFrameRight,text="Ingredients",font=("arial",12,"bold"),padx=2,pady=6)
         lblSearchWithIngre.grid(row=5,column=0)
-        txtSearchWithIngre=Entry(DataFrameRight,font=("arial",12),textvariable=self.SearchWithIngredient,width=35)
-        txtSearchWithIngre.grid(row=5,column=1,pady=10)
+        self.cmbSearchWithIngre=ttk.Combobox(DataFrameRight,font=("arial",12),textvariable=self.SearchWithIngredient,width=30,state="NORMAL")
+        self.cmbSearchWithIngre.grid(row=5,column=1,pady=10)
 
         btnSearchWIngre=Button(DataFrameRight,text="Search With Ingredients",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=23,command=self.search_with_ingre_name)
         btnSearchWIngre.grid(row=6,column=1,pady=20)
 
+        
+
+        self.update_combobox()
         #=========================Buttons==============================
         btnInsert=Button(ButtonFrame,text="Insert",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=28,command=self.insert)
         btnInsert.grid(row=0,column=0)
@@ -177,7 +191,7 @@ class Recipe:
         #=========Scrollbar==========
         scroll_x=ttk.Scrollbar(DetailsFrame,orient=HORIZONTAL)
         scroll_y=ttk.Scrollbar(DetailsFrame,orient=VERTICAL)
-        self.recipe_details=ttk.Treeview(DetailsFrame,column=("dishname","dishid","preptime","serves","difficulty","cuisine","tags","image","recipe","addedby","email"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
+        self.recipe_details=ttk.Treeview(DetailsFrame,column=("dishname","dishid","preptime","serves","difficulty","cuisine","tags","image","recipe","email"),xscrollcommand=scroll_x.set,yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM,fill=X)
         scroll_y.pack(side=RIGHT,fill=Y)
         
@@ -193,22 +207,20 @@ class Recipe:
         self.recipe_details.heading("tags",text="Tags")
         self.recipe_details.heading("image",text="Image")
         self.recipe_details.heading("recipe",text="Recipe")
-        self.recipe_details.heading("addedby",text="Added By")
         self.recipe_details.heading("email",text="Email")
         
         self.recipe_details["show"]="headings"
 
-        self.recipe_details.column("dishname",width=65)
-        self.recipe_details.column("dishid",width=65)
-        self.recipe_details.column("preptime",width=65)
-        self.recipe_details.column("serves",width=65)
-        self.recipe_details.column("difficulty",width=65)
-        self.recipe_details.column("cuisine",width=65)
-        self.recipe_details.column("tags",width=65)
-        self.recipe_details.column("image",width=65)
-        self.recipe_details.column("recipe",width=65)
-        self.recipe_details.column("addedby",width=65)
-        self.recipe_details.column("email",width=65)
+        self.recipe_details.column("dishname",width=100)
+        self.recipe_details.column("dishid",width=100)
+        self.recipe_details.column("preptime",width=100)
+        self.recipe_details.column("serves",width=100)
+        self.recipe_details.column("difficulty",width=100)
+        self.recipe_details.column("cuisine",width=100)
+        self.recipe_details.column("tags",width=100)
+        self.recipe_details.column("image",width=100)
+        self.recipe_details.column("recipe",width=100)
+        self.recipe_details.column("email",width=100)
 
         self.recipe_details.pack(fill=BOTH,expand=1)
         self.recipe_details.bind("<ButtonRelease-1>",self.get_cursor)
@@ -217,21 +229,33 @@ class Recipe:
     
     #=================Functionality Declaration==================
 
+    def update_combobox(self):
+            con = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            cur = con.cursor()
+            cur.execute("SELECT DishName FROM recipe")
+            recipe_options=[row[0] for row in cur.fetchall()]
+            self.cmbSearchWithName['values']=recipe_options
+
+            cur.execute("SELECT DISTINCT Ingredient FROM ingredients")
+            ingre_options=[row[0] for row in cur.fetchall()]
+            self.cmbSearchWithIngre['values']=ingre_options
+            cur.close()
+            con.close()
 
     def userExists(self):
         conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
         my_cursor = conn.cursor()
-        my_cursor.execute("SELECT AddedBy FROM user WHERE AddedBy LIKE %s", (f"%{self.AddedBy.get()}%",))
+        my_cursor.execute("SELECT Email FROM user WHERE Email LIKE %s", (f"%{self.Email.get()}%",))
         result = my_cursor.fetchone()
         conn.close()  # Close the connection after fetching the data
-        if result and result[0] == self.AddedBy.get():
+        if result and result[0] == self.Email.get():
             return True
         else:
             return False
 
 
     def setUser(self):
-        if self.AddedBy.get()=="":
+        if self.Email.get()=="":
             messagebox.showerror("Error","All User Details are Required")
         elif self.userExists():
             messagebox.showinfo("Success","User has been set")
@@ -250,9 +274,11 @@ class Recipe:
             messagebox.showinfo("Success","User has been set")
 
 
-    def addIngredients(self):
-        if self.Ingredient.get()=="" or self.IngreID.get()=="":
-            messagebox.showerror("Error","All Ingredient Details are Required")
+    def insertIngredient(self):
+        if not all([
+            self.Ingredient.get(), self.IngreID.get(), self.IngreQuantity.get()
+        ]):
+            messagebox.showerror("Error", "All Ingredient Details are Required")
         else:
             conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
             my_cursor=conn.cursor()
@@ -268,10 +294,49 @@ class Recipe:
             self.fetch_data()
             conn.close()
             messagebox.showinfo("Success","Ingredient has been inserted")
+            self.update_combobox()
 
+    def updateIngredient(self):
+        if not all([self.IngreID.get(), self.Ingredient.get(), self.IngreQuantity.get()]):
+            messagebox.showerror("Error", "All Ingredient Details are Required")
+        else:
+            conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
+            my_cursor=conn.cursor()
+            
+            my_cursor.execute("UPDATE ingredients SET Ingredient=%s, Quantity=%s WHERE IngreID=%s AND DishID=%s",(                                                                                                         
+                                                                                self.Ingredient.get(),
+                                                                                self.IngreID.get(),
+                                                                                self.IngreQuantity.get(),
+                                                                                self.DishID.get()     
+                                                                                                ))
+            
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo("Success","Ingredient has been updated")
+            self.update_combobox()
+
+    def deleteIngredient(self):
+        if not self.DishID.get() and self.IngreID.get():
+            messagebox.showerror("Error", "Please select an ingredient to delete.")
+        else:
+            conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            my_cursor = conn.cursor()
+            my_cursor.execute("DELETE FROM ingredients WHERE DishID=%s and IngreID=%s", (self.DishID.get(),self.IngreID.get()))
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success", "Ingredient has been deleted.")
+            self.fetch_data()  # Refresh the displayed data after deletion
+            self.update_combobox()
+
+            
     def insert(self):
-        if self.NameOfDish.get()=="" or self.DishID.get()=="":
-            messagebox.showerror("Error","All Recipe Details are Required")
+        if not all([
+            self.NameOfDish.get(), self.DishID.get(), self.PrepTime.get(),
+            self.Serves.get(), self.Difficulty.get(), self.Cuisine.get(),
+            self.Tags.get(), self.Image.get(), self.Recipe.get(), self.Email.get()
+        ]):
+            messagebox.showerror("Error", "All Recipe Details are Required")
         else:
             conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
             my_cursor=conn.cursor()
@@ -286,27 +351,36 @@ class Recipe:
                                                                                             self.Tags.get(),
                                                                                             self.Image.get(), 
                                                                                             self.Recipe.get(),
-                                                                                            self.AddedBy.get()    
+                                                                                            self.Email.get()    
                                                                                                                    ))
             
             conn.commit()
             self.fetch_data()
             conn.close()
             messagebox.showinfo("Success","Record has been inserted")
+            self.update_combobox()
 
 
 
     def update_recipe(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
-        my_cursor = conn.cursor()
-        my_cursor.execute("UPDATE recipe SET DishName=%s, PrepTime=%s, Serves=%s, Difficulty=%s, Cuisine=%s, Tags=%s, Image=%s, Recipe=%s WHERE DishID=%s", (
-                            self.NameOfDish.get(), self.PrepTime.get(), self.Serves.get(), self.Difficulty.get(), 
-                            self.Cuisine.get(), self.Tags.get(), self.Image.get(), self.Recipe.get(), self.DishID.get()
-                        ))
-        conn.commit()
-        self.fetch_data()
-        conn.close()
-        messagebox.showinfo("Success", "Recipe record has been updated")
+        if not all([
+            self.NameOfDish.get(), self.DishID.get(), self.PrepTime.get(),
+            self.Serves.get(), self.Difficulty.get(), self.Cuisine.get(),
+            self.Tags.get(), self.Image.get(), self.Recipe.get(), self.Email.get()
+        ]):
+            messagebox.showerror("Error", "All Recipe Details are Required")
+        else:
+            conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            my_cursor = conn.cursor()
+            my_cursor.execute("UPDATE recipe SET DishName=%s, PrepTime=%s, Serves=%s, Difficulty=%s, Cuisine=%s, Tags=%s, Image=%s, Recipe=%s WHERE DishID=%s", (
+                                self.NameOfDish.get(), self.PrepTime.get(), self.Serves.get(), self.Difficulty.get(), 
+                                self.Cuisine.get(), self.Tags.get(), self.Image.get(), self.Recipe.get(), self.DishID.get()
+                            ))
+            conn.commit()
+            self.fetch_data()
+            conn.close()
+            messagebox.showinfo("Success", "Recipe record has been updated")
+            self.update_combobox()
 
     def search_with_dish_name(self):
         search_name = self.SearchWithName.get()
@@ -348,7 +422,7 @@ class Recipe:
                             "difficulty": row[4],
                             "cuisine": row[5],
                             "tags": row[6],
-                            "added_by": row[9],
+                            "email": row[9],
                             "recipe": row[8],
                             "ingredients": []  # List to store ingredients for this dish
                         }
@@ -369,7 +443,7 @@ class Recipe:
                     txtSearchResult.insert(END, f"Difficulty : {dish_data['difficulty']}\n")
                     txtSearchResult.insert(END, f"Cuisine : {dish_data['cuisine']}\n")
                     txtSearchResult.insert(END, f"Tags : {dish_data['tags']}\n")
-                    txtSearchResult.insert(END, f"Added By : {dish_data['added_by']}\n")
+                    txtSearchResult.insert(END, f"Added By : {dish_data['email']}\n")
                     txtSearchResult.insert(END, f"Recipe : {dish_data['recipe']}\n")
 
                     # Display ingredients for this dish
@@ -434,6 +508,7 @@ class Recipe:
             conn.close()
             messagebox.showinfo("Success", "Record has been deleted.")
             self.fetch_data()  # Refresh the displayed data after deletion
+            self.update_combobox()
 
     def clear_fields(self):
         self.AddedBy.set("")
@@ -480,12 +555,8 @@ class Recipe:
         self.Tags.set(row[6])
         self.Image.set(row[7])
         self.Recipe.set(row[8])
-        self.AddedBy.set(row[9])
+        self.Email.set(row[9])
 
 root=Tk()
 ob=Recipe(root)
 root.mainloop()
-
-
-
-
