@@ -1,36 +1,90 @@
-from tkinter import *
-from tkinter import ttk
-import random
-import time
-import datetime
-from tkinter import messagebox
+import tkinter as tk
 import mysql.connector
-from PIL import Image, ImageTk
-from tkinter import Toplevel
+from tkinter import messagebox
+import subprocess
 
-class Reg:
-    def __init__(self,root):
-        self.root=root
-        self.root.title("Registration")
-        self.root.geometry("1510x810+0+0")
-        self.AddedBy=StringVar()
-        self.Email=StringVar()
-        self.Password=StringVar()
+class RegistrationForm:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("User Registration")
+        self.root.geometry("600x400+0+0")
 
 
+        # Create input fields
+        self.username_label = tk.Label(root, text="Username:")
+        self.username_label.grid(row=0, column=3)
+        self.username_entry = tk.Entry(root)
+        self.username_entry.grid(row=0, column=4)
 
-        DataFrame=Frame(self.root,bd=20,relief=RIDGE)
-        DataFrame.place(x=0,y=130,width=1500,height=470)
-        
-        lblAddedBy=Label(DataFrameLeft,text="Added By",font=("arial",12,"bold"),padx=2,pady=6)
-        lblAddedBy.grid(row=0,column=0)
-        txtAddedBy=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.AddedBy,width=30)
-        txtAddedBy.grid(row=0,column=1)
+        self.email_label = tk.Label(root, text="Email:")
+        self.email_label.grid(row=1, column=3)
+        self.email_entry = tk.Entry(root)
+        self.email_entry.grid(row=1, column=4)
 
-        lblEmail=Label(DataFrameLeft,text="Email Addr",font=("arial",12,"bold"),padx=2,pady=6)
-        lblEmail.grid(row=1,column=0)
-        txtEmail=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Email,width=30)
-        txtEmail.grid(row=1,column=1)
+        self.password_label = tk.Label(root, text="Password:")
+        self.password_label.grid(row=2, column=3)
+        self.password_entry = tk.Entry(root, show="*")
+        self.password_entry.grid(row=2, column=4)
 
-        btnSetUser=Button(DataFrameLeft,text="Set User",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=15,command=self.setUser)
-        btnSetUser.grid(row=2,column=1,pady=12)
+        # Create buttons
+        self.register_button = tk.Button(root, text="Register", command=self.register)
+        self.register_button.grid(row=3, column=3)
+
+        self.login_button = tk.Button(root, text="Login", command=self.login)
+        self.login_button.grid(row=3, column=4)
+
+    def register(self):
+        # Get input from text fields
+        username = self.username_entry.get()
+        email = self.email_entry.get()
+        password = self.password_entry.get()
+
+        # Validate input (e.g., check if fields are not empty)
+        if not all([username, email, password]):
+            messagebox.showerror("Error", "All fields are required")
+            return
+
+        # Store user data securely in the database
+        try:
+            conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO user (AddedBy, Email, Password) VALUES (%s, %s, %s)", (username, email, password))
+            conn.commit()
+            conn.close()
+            messagebox.showinfo("Success", "Registration successful")
+            subprocess.run(["python", "recipe.py", username, email])
+        except mysql.connector.Error as e:
+            messagebox.showerror("Error", f"Failed to register: {e}")
+
+    def login(self):
+        # Get input from text fields
+        email = self.email_entry.get()
+        password = self.password_entry.get()
+
+        # Validate input
+        if not all([email, password]):
+            messagebox.showerror("Error", "Email and password are required")
+            return
+
+        # Authenticate user
+        try:
+            conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+            cursor = conn.cursor()
+            cursor.execute("SELECT AddedBy FROM user WHERE Email = %s AND Password = %s", (email, password))
+            user = cursor.fetchone()
+            conn.close()
+            if user:
+                # Pass username and email to recipe.py
+                username = user[0]
+                messagebox.showinfo("Success", f"Login successful. Username: {username}")
+                subprocess.run(["python", "recipe.py", username, email])
+            else:
+                messagebox.showerror("Error", "Invalid email or password")
+        except mysql.connector.Error as e:
+            messagebox.showerror("Error", f"Failed to login: {e}")
+
+
+root = tk.Tk()
+app = RegistrationForm(root)
+root.mainloop()
+

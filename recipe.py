@@ -7,6 +7,15 @@ from tkinter import messagebox
 import mysql.connector
 from PIL import Image, ImageTk
 from tkinter import Toplevel
+import sys
+
+username = ""
+email = ""
+
+if __name__ == "__main__":
+    if len(sys.argv) >= 3:
+        username = sys.argv[1]
+        email = sys.argv[2]
 
 class Recipe:
     def __init__(self,root):
@@ -26,9 +35,6 @@ class Recipe:
         self.Ingredient=StringVar()
         self.IngreID=StringVar()
         self.IngreQuantity=StringVar()
-        self.AddedBy=StringVar()
-        self.Email=StringVar()
-        
         self.SearchWithName=StringVar()
         self.SearchWithIngredient=StringVar()
         
@@ -57,18 +63,6 @@ class Recipe:
     
         #=====================DataFrameLeft===========================
 
-        # lblAddedBy=Label(DataFrameLeft,text="Added By",font=("arial",12,"bold"),padx=2,pady=6)
-        # lblAddedBy.grid(row=0,column=0)
-        # txtAddedBy=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.AddedBy,width=30)
-        # txtAddedBy.grid(row=0,column=1)
-
-        # lblEmail=Label(DataFrameLeft,text="Email Addr",font=("arial",12,"bold"),padx=2,pady=6)
-        # lblEmail.grid(row=1,column=0)
-        # txtEmail=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Email,width=30)
-        # txtEmail.grid(row=1,column=1)
-
-        # btnSetUser=Button(DataFrameLeft,text="Set User",font=("arial",12,"bold"),fg="#330000",bg="#D09683",width=15,command=self.setUser)
-        # btnSetUser.grid(row=2,column=1,pady=12)
 
         lblDishName=Label(DataFrameLeft,text="Dish Name",font=("arial",12,"bold"),padx=2,pady=6)
         lblDishName.grid(row=0,column=0)
@@ -116,34 +110,46 @@ class Recipe:
         txtRecipe.grid(row=8, column=1)
 
 
+        img = Image.open("D:\\Workspace\\Python Workspace\\RecipeFinder\\images\\user.jpg")
+        img = img.resize((80,80), Image.LANCZOS)
+        img = ImageTk.PhotoImage(img)
+        lblImage = Label(DataFrameLeft, image=img)
+        lblImage.image = img
+        lblImage.grid(row=0, column=2, rowspan=2)
+
+        lblUserNow=Label(DataFrameLeft,text=username,font=("arial",12,"bold"),padx=2,pady=6)
+        lblUserNow.grid(row=0,column=3)
+        
+        lblEmailNow=Label(DataFrameLeft,text=email,font=("arial",12,"bold"),padx=2,pady=6)
+        lblEmailNow.grid(row=1,column=3)
 
         lblIngrInfo=Label(DataFrameLeft,text="Input Ingredients Individually",font=("arial",12,"bold"),padx=2,pady=6)
-        lblIngrInfo.grid(row=3,column=3,pady=5, columnspan=2)
+        lblIngrInfo.grid(row=2,column=3,pady=5, columnspan=2)
 
         lblIngredient=Label(DataFrameLeft,text="Ingredient",font=("arial",12,"bold"),padx=2,pady=6)
-        lblIngredient.grid(row=4,column=2,padx=15)
+        lblIngredient.grid(row=3,column=2,padx=15)
         txtIngredient=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.Ingredient,width=35) 
-        txtIngredient.grid(row=4,column=3, columnspan=2)
+        txtIngredient.grid(row=3,column=3, columnspan=2)
 
         lblIngreID=Label(DataFrameLeft,text="Ingredient ID",font=("arial",12,"bold"),padx=2,pady=6)
-        lblIngreID.grid(row=5,column=2,padx=15)
+        lblIngreID.grid(row=4,column=2,padx=15)
         txtIngreID=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreID,width=35) 
-        txtIngreID.grid(row=5,column=3, columnspan=2)
+        txtIngreID.grid(row=4,column=3, columnspan=2)
 
         lblIngreQuantity=Label(DataFrameLeft,text="Quantity",font=("arial",12,"bold"),padx=2,pady=6)
-        lblIngreQuantity.grid(row=6,column=2,padx=15)
+        lblIngreQuantity.grid(row=5,column=2,padx=15)
         txtIngreQuantity=Entry(DataFrameLeft,font=("arial",12,"bold"),textvariable=self.IngreQuantity,width=35) 
-        txtIngreQuantity.grid(row=6,column=3, columnspan=2)
+        txtIngreQuantity.grid(row=5,column=3, columnspan=2)
 
 
         btnInsertIngredient = Button(DataFrameLeft, text="Insert", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.insertIngredient)
-        btnInsertIngredient.grid(row=8, column=2, padx=11)
+        btnInsertIngredient.grid(row=7, column=2, padx=11)
 
         btnUpdateIngredient = Button(DataFrameLeft, text="Update", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.updateIngredient)
-        btnUpdateIngredient.grid(row=8, column=3, padx=9)
+        btnUpdateIngredient.grid(row=7, column=3, padx=9)
 
         btnDeleteIngredient = Button(DataFrameLeft, text="Delete", font=("arial", 12, "bold"), fg="#330000", bg="#D09683", width=15, command=self.deleteIngredient)
-        btnDeleteIngredient.grid(row=8, column=4, padx=9)
+        btnDeleteIngredient.grid(row=7, column=4, padx=9)
         #=====================DataFrameRight===========================
 
         self.cmbSearchWithName = None
@@ -242,43 +248,13 @@ class Recipe:
             cur.close()
             con.close()
 
-    def userExists(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
-        my_cursor = conn.cursor()
-        my_cursor.execute("SELECT Email FROM user WHERE Email LIKE %s", (f"%{self.Email.get()}%",))
-        result = my_cursor.fetchone()
-        conn.close()  # Close the connection after fetching the data
-        if result and result[0] == self.Email.get():
-            return True
-        else:
-            return False
-
-
-    def setUser(self):
-        if self.Email.get()=="":
-            messagebox.showerror("Error","All User Details are Required")
-        elif self.userExists():
-            messagebox.showinfo("Success","User has been set")
-        else:
-            conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
-            my_cursor=conn.cursor()
-            
-            my_cursor.execute("INSERT INTO user values (%s,%s)",(                                                                                                         
-                                                                    self.AddedBy.get(),
-                                                                    self.Email.get()
-                                                                                        ))
-            
-            conn.commit()
-            self.fetch_data()
-            conn.close()
-            messagebox.showinfo("Success","User has been set")
-
-
     def insertIngredient(self):
         if not all([
             self.Ingredient.get(), self.IngreID.get(), self.IngreQuantity.get()
         ]):
             messagebox.showerror("Error", "All Ingredient Details are Required")
+        elif not self.can_edit():
+            messagebox.showerror("Error", "This Recipe doesn't belong to you")
         else:
             conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
             my_cursor=conn.cursor()
@@ -299,6 +275,8 @@ class Recipe:
     def updateIngredient(self):
         if not all([self.IngreID.get(), self.Ingredient.get(), self.IngreQuantity.get()]):
             messagebox.showerror("Error", "All Ingredient Details are Required")
+        elif not self.can_edit():
+            messagebox.showerror("Error", "This Recipe doesn't belong to you")
         else:
             conn=mysql.connector.connect(host="localhost",username="root",password="root",database="DishDetails")
             my_cursor=conn.cursor()
@@ -319,6 +297,8 @@ class Recipe:
     def deleteIngredient(self):
         if not self.DishID.get() and self.IngreID.get():
             messagebox.showerror("Error", "Please select an ingredient to delete.")
+        elif not self.can_edit():
+            messagebox.showerror("Error", "This Recipe doesn't belong to you")
         else:
             conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
             my_cursor = conn.cursor()
@@ -334,7 +314,7 @@ class Recipe:
         if not all([
             self.NameOfDish.get(), self.DishID.get(), self.PrepTime.get(),
             self.Serves.get(), self.Difficulty.get(), self.Cuisine.get(),
-            self.Tags.get(), self.Image.get(), self.Recipe.get(), self.Email.get()
+            self.Tags.get(), self.Image.get(), self.Recipe.get()
         ]):
             messagebox.showerror("Error", "All Recipe Details are Required")
         else:
@@ -351,7 +331,7 @@ class Recipe:
                                                                                             self.Tags.get(),
                                                                                             self.Image.get(), 
                                                                                             self.Recipe.get(),
-                                                                                            self.Email.get()    
+                                                                                            email  
                                                                                                                    ))
             
             conn.commit()
@@ -360,15 +340,26 @@ class Recipe:
             messagebox.showinfo("Success","Record has been inserted")
             self.update_combobox()
 
-
+    def can_edit(self):
+        conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
+        my_cursor = conn.cursor()
+        my_cursor.execute("SELECT Email from recipe WHERE DishID=%s",(self.DishID.get(),))
+        result = my_cursor.fetchone()
+        conn.close()  # Close the connection after fetching the data
+        if result and result[0] == email:
+            return True
+        else:
+            return False
 
     def update_recipe(self):
         if not all([
             self.NameOfDish.get(), self.DishID.get(), self.PrepTime.get(),
             self.Serves.get(), self.Difficulty.get(), self.Cuisine.get(),
-            self.Tags.get(), self.Image.get(), self.Recipe.get(), self.Email.get()
+            self.Tags.get(), self.Image.get(), self.Recipe.get()
         ]):
             messagebox.showerror("Error", "All Recipe Details are Required")
+        elif not self.can_edit():
+            messagebox.showerror("Error", "This Recipe doesn't belong to you")
         else:
             conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
             my_cursor = conn.cursor()
@@ -449,7 +440,7 @@ class Recipe:
                     # Display ingredients for this dish
                     txtSearchResult.insert(END, "Ingredients   :\n")
                     for ingredient in dish_data["ingredients"]:
-                        txtSearchResult.insert(END, f"- {ingredient['quantity']} {ingredient['ingredient']}\n")
+                        txtSearchResult.insert(END, f"- {ingredient['quantity']} {ingredient['ingredient']} ({ingredient['ingredient_id']})\n")
 
                 if rows[0][7]:
                     try:
@@ -473,7 +464,7 @@ class Recipe:
         if search_name:
             conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
             my_cursor = conn.cursor()
-            my_cursor.execute("SELECT DISTINCT recipe.DishName FROM recipe INNER JOIN ingredients ON recipe.DishID = ingredients.DishID WHERE ingredients.Ingredient LIKE %s", (f"%{search_name}%",))
+            my_cursor.execute("SELECT recipe.DishName FROM recipe INNER JOIN ingredients ON recipe.DishID = ingredients.DishID WHERE ingredients.Ingredient LIKE %s", (f"%{search_name}%",))
 
             rows = my_cursor.fetchall()  # Fetch all rows
 
@@ -499,6 +490,8 @@ class Recipe:
     def delete_data(self):
         if not self.DishID.get():
             messagebox.showerror("Error", "Please select a record to delete.")
+        elif not self.can_edit():
+            messagebox.showerror("Error", "This Recipe doesn't belong to you")
         else:
             conn = mysql.connector.connect(host="localhost", username="root", password="root", database="DishDetails")
             my_cursor = conn.cursor()
@@ -511,8 +504,6 @@ class Recipe:
             self.update_combobox()
 
     def clear_fields(self):
-        self.AddedBy.set("")
-        self.Email.set("")
         self.NameOfDish.set("")
         self.DishID.set("")
         self.PrepTime.set("")

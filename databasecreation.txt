@@ -2,20 +2,22 @@
 mysql> use DishDetails;
 Database changed
 
-mysql> create table user (AddedBy varchar(30) primary key, Email varchar(40));
+mysql> CREATE TABLE user (AddedBy VARCHAR(30) NOT NULL,Email VARCHAR(40) NOT NULL PRIMARY KEY,Password VARCHAR(50));
 Query OK, 0 rows affected (0.04 sec)
 
 mysql> describe user;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| AddedBy | varchar(30) | NO   | PRI | NULL    |       |
-| Email   | varchar(40) | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-2 rows in set (0.02 sec)
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| AddedBy  | varchar(30) | NO   |     | NULL    |       |
+| Email    | varchar(40) | NO   | PRI | NULL    |       |
+| Password | varchar(50) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
 
-mysql> create table recipe (DishName varchar(20),DishID varchar(20) primary key,PrepTime varchar(20),Serves varchar(20),
-Difficulty varchar(20),Cuisine varchar(20),Tags varchar(20),Image varchar(200),Recipe varchar(200),AddedBy varchar(30),foreign key(AddedBy) references user(AddedBy));
+mysql> CREATE TABLE recipe (DishName VARCHAR(20),DishID VARCHAR(20) NOT NULL PRIMARY KEY,PrepTime VARCHAR(20),Serves INT,Difficulty VARCHAR(20),
+Cuisine VARCHAR(20),Tags VARCHAR(20),Image VARCHAR(200),Recipe VARCHAR(200),Email VARCHAR(40),FOREIGN KEY (Email) REFERENCES user(Email));
+
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> describe recipe;
@@ -25,17 +27,18 @@ mysql> describe recipe;
 | DishName   | varchar(20)  | YES  |     | NULL    |       |
 | DishID     | varchar(20)  | NO   | PRI | NULL    |       |
 | PrepTime   | varchar(20)  | YES  |     | NULL    |       |
-| Serves     | varchar(20)  | YES  |     | NULL    |       |
+| Serves     | int          | YES  |     | NULL    |       |
 | Difficulty | varchar(20)  | YES  |     | NULL    |       |
 | Cuisine    | varchar(20)  | YES  |     | NULL    |       |
 | Tags       | varchar(20)  | YES  |     | NULL    |       |
 | Image      | varchar(200) | YES  |     | NULL    |       |
 | Recipe     | varchar(200) | YES  |     | NULL    |       |
-| AddedBy    | varchar(30)  | YES  | MUL | NULL    |       |
+| Email      | varchar(40)  | YES  | MUL | NULL    |       |
 +------------+--------------+------+-----+---------+-------+
-10 rows in set (0.01 sec)
+10 rows in set (0.00 sec)
 
-mysql> create table ingredients (Ingredient varchar(30),IngreID varchar(20),Quantity varchar(30),DishID varchar(20),foreign key(DishID) references recipe(DishID),primary key(IngreID,DishID));
+mysql> create table ingredients (Ingredient varchar(30),IngreID varchar(20),Quantity varchar(30),DishID varchar(20),
+foreign key(DishID) references recipe(DishID),primary key(IngreID,DishID));
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> describe ingredients;
