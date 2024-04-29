@@ -7,31 +7,44 @@ class RegistrationForm:
     def __init__(self, root):
         self.root = root
         self.root.title("User Registration")
-        self.root.geometry("600x400+0+0")
-
 
         # Create input fields
         self.username_label = tk.Label(root, text="Username:")
-        self.username_label.grid(row=0, column=3)
+        self.username_label.grid(row=1, column=1, padx=10, pady=5, sticky="e")
         self.username_entry = tk.Entry(root)
-        self.username_entry.grid(row=0, column=4)
+        self.username_entry.grid(row=1, column=2, padx=10, pady=5)
 
         self.email_label = tk.Label(root, text="Email:")
-        self.email_label.grid(row=1, column=3)
+        self.email_label.grid(row=2, column=1, padx=10, pady=5, sticky="e")
         self.email_entry = tk.Entry(root)
-        self.email_entry.grid(row=1, column=4)
+        self.email_entry.grid(row=2, column=2, padx=10, pady=5)
 
         self.password_label = tk.Label(root, text="Password:")
-        self.password_label.grid(row=2, column=3)
+        self.password_label.grid(row=3, column=1, padx=10, pady=5, sticky="e")
         self.password_entry = tk.Entry(root, show="*")
-        self.password_entry.grid(row=2, column=4)
+        self.password_entry.grid(row=3, column=2, padx=10, pady=5)
 
         # Create buttons
         self.register_button = tk.Button(root, text="Register", command=self.register)
-        self.register_button.grid(row=3, column=3)
+        self.register_button.grid(row=4, column=1, columnspan=2, padx=10, pady=5, sticky="ew")
 
         self.login_button = tk.Button(root, text="Login", command=self.login)
-        self.login_button.grid(row=3, column=4)
+        self.login_button.grid(row=5, column=1, columnspan=2, padx=10, pady=5, sticky="ew")
+
+        # Center the window
+        self.center_window()
+
+    def center_window(self):
+        # Get the screen width and height
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        # Calculate the x and y coordinates to center the window
+        x = (screen_width - 400) // 2
+        y = (screen_height - 300) // 2
+
+        # Set the geometry of the window
+        self.root.geometry(f"250x200+{x}+{y}")
 
     def register(self):
         # Get input from text fields
@@ -87,4 +100,3 @@ class RegistrationForm:
 root = tk.Tk()
 app = RegistrationForm(root)
 root.mainloop()
-
