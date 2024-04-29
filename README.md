@@ -1,4 +1,7 @@
 # Recipe Finding System
+## Entity Relationship Diagram :
+![Screenshot 2024-04-28 235115](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/de627795-e772-43be-bb6a-621ed06d24eb)
+
 ## GUI of the System : 
 ### User Authentication :
 ![Screenshot 2024-04-21 163544](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/238c235e-3071-4583-a905-9b2a81c4420d)
