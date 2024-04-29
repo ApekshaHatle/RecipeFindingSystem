@@ -1,25 +1,29 @@
 # Recipe Finding System
 ## GUI of the System : 
-![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/b0128624-261c-4888-bf58-c74e0e9803e5)
-* Here the user needs to first enter their details and click Set User
-* Then enter the necessary Recipe details and click Insert
-* Then add each ingredient separately
-## Example Input : 
-![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/52541132-57a0-4707-9d72-1f42c22e22b0)
+### User Authentication :
+![Screenshot 2024-04-21 163544](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/238c235e-3071-4583-a905-9b2a81c4420d)
 
+* Register if you haven't created an account
+* Login if you already have an account
+ 
+### The Recipe Management System :
+![Screenshot 2024-04-21 163206](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/1f3d910c-cdd3-4167-b3ef-9b5d14575ea2)
+
+* On successful login, the user's name and email is displayed on screen and the entries will be recorded on that name 
+* Enter the necessary Recipe details and click Insert
+* Then add each ingredient separately
+* User can update/delete recipes as well
+
+## Example Input : 
+![Screenshot 2024-04-21 163404](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/533e2ebd-9308-4f30-aa5e-c1d4e1c627e9)
 
 ## For searching :
 * Enter the Dish name and click Search With Dish Name
   
-![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/ffd73f06-dff4-40c1-b38d-7da79d4d132c)
-
+![Screenshot 2024-04-21 170223](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/a5c1d303-26d0-41fb-8864-d723896edac7)
 
 * Enter Ingredient name and click Search With Ingredient
   
-![image](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/7f61ae8a-e5d9-443f-8516-a0bb43218de4)
+![Screenshot 2024-04-21 170308](https://github.com/ApekshaHatle/RecipeFindingSystem/assets/124706186/8d06dd18-e996-4861-8df9-3f1424ce4e72)
 
-
-## Other Functions : 
-The user can also Update, Delete and Clear entries.
-Click Exit to exit the System
 
